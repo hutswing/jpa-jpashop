@@ -1,0 +1,74 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+title 테이블설계
+
+entity MEMBER {
+    MEMBER_ID
+    --
+    NAME
+    CITY
+    STREET
+    ZIPCODE
+}
+
+entity ORDERS {
+    ORDER_ID
+    --
+    MEMBER_ID (FK)
+    DELIVERY_ID (FK)
+    ORDERDATE
+    STATUS
+}
+
+entity DELIVERY {
+    DELIVERY_ID
+    --
+    STATUS
+    CITY
+    STREET
+    ZIPCODE
+}
+
+entity ORDER_ITEM {
+    ORDER_ITEM_ID
+    --
+    ORDER_ID (FK)
+    ITEM_ID (FK)
+    ORDERPRICE
+    COUNT
+}
+
+entity CATEGORY {
+    CATEGORY_ID
+    --
+    PARENT_ID (FK)
+    NAME
+}
+
+entity CATEGORY_ITEM {
+    CATEGORY_ID
+    ITEM_ID
+    --
+}
+
+entity ITEM {
+    NAME
+    PRICE
+    STOCKQUANTITY
+    DTYPE
+    ARTIST
+    ETC
+    AUTHOR
+    ISBN
+    DIRECTOR
+    ACTOR
+}
+
+MEMBER ||..o{ ORDERS
+ORDERS ||..|| DELIVERY
+ORDERS ||..|{ ORDER_ITEM
+ORDER_ITEM }o..|| ITEM
+CATEGORY ||--o{ CATEGORY_ITEM
+CATEGORY_ITEM }o--|| ITEM
+
+@enduml

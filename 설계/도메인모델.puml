@@ -1,0 +1,83 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+title 엔티티 분석
+
+entity Member {
+    id : Long
+    name : String
+    address : Address
+    orders : List
+}
+
+entity Order {
+    id : Long
+    member : Member
+    orderItems : List
+    delivery : Delivery
+    orderDate : Date
+    status : OrderStatus
+}
+
+entity Delivery {
+    id : Long
+    order : Order
+    address : Address
+    status : DeliveryStatus
+}
+
+entity OrderItem {
+    id : Long
+    item : Item
+    order : Order
+    orderPrice
+    count
+}
+
+class Address<< (V,#ADD1B2) >> {
+    city
+    street
+    zipcode
+}
+
+entity Category {
+    id
+    name
+    items: List
+    parent: Category
+    child: List
+}
+
+entity Item {
+    id
+    name
+    price: int
+    stockQuantity
+    categories: List
+}
+
+entity Album {
+    artist
+    etc
+}
+
+entity Book {
+    author
+    isbn
+}
+
+entity Movie {
+    director
+    actor
+}
+
+Member --|{ Order
+Order -- Delivery
+Order --|{ OrderItem
+OrderItem }|-- Item
+Category }|--|{ Item
+Item <|-- Album
+Item <|-- Book
+Item <|-- Movie
+
+
+@enduml
