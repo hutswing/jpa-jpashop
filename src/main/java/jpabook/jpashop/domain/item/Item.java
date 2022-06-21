@@ -1,7 +1,7 @@
 package jpabook.jpashop.domain.item;
 
 import jpabook.jpashop.domain.Category;
-import jpabook.jpashop.exception.NoEnoghStockException;
+import jpabook.jpashop.exception.NotEnoghStockException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -43,7 +43,7 @@ public abstract class Item {
     public void removeStock(int quantity) {
         int restStock = this.stockQuantity - quantity;
         if (restStock < 0) {
-            throw new NoEnoghStockException("need more stock");
+            throw new NotEnoghStockException("need more stock");
         }
         this.stockQuantity = restStock;
     }
